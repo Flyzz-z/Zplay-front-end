@@ -12,6 +12,14 @@ const videoTemplate = {
     }
 }
 
+const liveTemplate = {
+    data : {
+        "id": 1,
+        "title": "xzz的视频",
+        "url": "https://flyzz-videos.oss-cn-beijing.aliyuncs.com/test.flv",
+    }
+}
+
 const danmus: {} = { 
     data : [{
         time: 1,
@@ -30,3 +38,4 @@ const danmus: {} = {
 }
 mockjs.mock("http://127.0.0.1:3000/api/video/1",videoTemplate);
 mockjs.mock(RegExp("http://127.0.0.1:3000/danmu"+".*"),danmus);
+mockjs.mock("http://127.0.0.1:3000/api/live/1",liveTemplate);

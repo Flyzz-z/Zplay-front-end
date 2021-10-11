@@ -1,4 +1,5 @@
-import { Barrage, VideoInfo } from "@/vo/Video";
+import { Barrage } from "@/vo/barrage";
+import { VideoInfo } from "@/vo/Video";
 import { client, Result } from "./axios-http";
 
 export  async function getVideoInfo(id: Number): Promise<Result<VideoInfo>> {

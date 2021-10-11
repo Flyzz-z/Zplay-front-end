@@ -13,7 +13,7 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import load from '@/api/videoPlayer/loadVideoPlayer';
+import load from '@/api/videoPlayer/loadPlayer';
 const loadPlayer = load;
 </script>
 

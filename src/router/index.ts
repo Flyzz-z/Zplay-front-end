@@ -15,6 +15,12 @@ const routes = [
         component: Video,
         name: "video",
         alias: "/v/:id"
+    },
+    {
+        path: "/live/:id",
+        component: Live,
+        name: "live",
+        alias: "/l/:id"
     }
 ];
 

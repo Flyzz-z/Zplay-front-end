@@ -3,7 +3,7 @@ import { client, Result } from "./axios-http";
 
 export async function getLiveInfo(id: Number): Promise<Result<LiveInfo>> {
     const response = await client.request({
-        url: ""+id,
+        url: "http://127.0.0.1:3000/api/live/"+id,
         method: "GET"
     })
     return response.data;

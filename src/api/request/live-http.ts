@@ -9,3 +9,11 @@ export async function getLiveInfo(id: Number): Promise<Result<LiveInfo>> {
     return response.data;
 }
 
+export async function getSign(): Promise<Result<string>> {
+    const response = await client.request({
+        url: "/danmaku/sign",
+        method: "GET"
+    })
+    return response.data;
+}
+

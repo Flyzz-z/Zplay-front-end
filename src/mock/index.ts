@@ -16,7 +16,7 @@ const liveTemplate = {
     data : {
         "id": 1,
         "title": "xzz的视频",
-        "url": "https://flyzz-videos.oss-cn-beijing.aliyuncs.com/test.flv",
+        "url": "http://39.105.182.190/live?app=myapp&stream=mystream",
     }
 }
 

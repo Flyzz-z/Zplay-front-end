@@ -9,13 +9,22 @@
   </el-row>
 </template>
 
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({                                         
+
+})
+</script>
+
+
 <script setup lang="ts">
 import { getLiveInfo } from "@/api/request/live-http";
 import { LiveInfo } from "@/vo/Live";
-import { onMounted, provide, reactive } from "@vue/runtime-core";
+import {  onMounted, provide, reactive } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
 
-
+const getLivePlayer = ref();
 function loadLive() {
   const route = useRoute();
   const {id} = route.params;
@@ -33,9 +42,11 @@ function loadLive() {
       liveInfo.id = data.id;
       liveInfo.title = data.title;
       liveInfo.url = data.url;
+      getLivePlayer.value.loadPlayer(liveInfo);
     })
   })
 }
+loadLive();
 </script>
 
 <style>

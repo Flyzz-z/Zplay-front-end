@@ -6,7 +6,8 @@ export interface Barrage {
     content: string,
     author: string,
     videoId: Number,
-    createTime?: Date
+    createTime?: Date,
+    sign?: string
 }
 
 export interface DplayerBarrage {

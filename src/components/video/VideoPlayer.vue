@@ -13,8 +13,8 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import load from '@/api/videoPlayer/loadPlayer';
-const loadPlayer = load;
+import {loadVideoPlayer} from '@/api/components/video/VideoPlayer';
+const loadPlayer = loadVideoPlayer;
 </script>
 
 <style lang="scss" scoped>

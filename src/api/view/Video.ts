@@ -2,7 +2,7 @@ import { onMounted, provide, reactive } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
 import { getVideoInfo} from "../request/video-http";
 import { VideoInfo } from '@/vo/Video';
-function loadVideo(getVideoPlayer: any) {
+export function loadVideo(getVideoPlayer: any) {
   const route = useRoute();
   const {id} = route.params;
   const videoInfo: VideoInfo = reactive({
@@ -31,4 +31,3 @@ function loadVideo(getVideoPlayer: any) {
   })
   });
 }
-export default loadVideo;

@@ -4,7 +4,7 @@ import flvjs from "flv.js"
 import { getBarrages, sendBarrage } from '@/api/request/video-http';
 import { Barrage, DplayerBarrage } from '@/vo/barrage';
 
-function loadPlayer(videoInfo: VideoInfo) {
+export function loadVideoPlayer(videoInfo: VideoInfo) {
   const dp = new DPlayer({
     container: document.getElementById("video-player"),
     video: {
@@ -64,5 +64,3 @@ function loadPlayer(videoInfo: VideoInfo) {
     }
   });
 }
-
-export default loadPlayer;

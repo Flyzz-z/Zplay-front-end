@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import loadVideo from '@/api/video/loadVideo';
+import {loadVideo} from '@/api/view/Video';
 const getVideoPlayer = ref();
 loadVideo(getVideoPlayer);
 

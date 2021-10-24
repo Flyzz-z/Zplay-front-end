@@ -4,17 +4,25 @@ import { Barrage, DplayerBarrage } from '@/vo/barrage';
 import { LiveInfo } from '@/vo/Live';
 // @ts-ignore
 import SockJS from 'sockjs-client/dist/sockjs';
-import webstomp from 'webstomp-client';
+import { Client,Message } from '@stomp/stompjs';
 import { nanoid } from 'nanoid'
 
 
 
 export function loadLivePlayer(liveInfo: LiveInfo) {
 
-  const socket = new SockJS("http://127.0.0.1:8080/connect");
-  const stompClient = webstomp.over(socket);
-  const sign = nanoid()
-
+  const stompClient = new Client({
+    brokerURL: "ws://localhost:8080/stomp",
+    reconnectDelay: 2000,
+    heartbeatIncoming: 10000,
+    heartbeatOutgoing: 10000,
+    debug: function (str) {
+      console.log(str);
+    },
+  });
+ 
+  const sign = nanoid();
+  
 
   const dp = new DPlayer({
     container: document.getElementById("live-player"),
@@ -43,9 +51,9 @@ export function loadLivePlayer(liveInfo: LiveInfo) {
     },
     apiBackend: {
       read: (options) => {
-        stompClient.connect({}, () => {
-          stompClient.subscribe("/topic/live/" + liveInfo.id, (frame) => {
-            const barrage: Barrage = JSON.parse(frame.body);
+        stompClient.onConnect = () => {
+          stompClient.subscribe("live" + liveInfo.id, (message) => {
+            const barrage: Barrage = JSON.parse(message.body);
             if(barrage.sign == sign) return;
             const dan = {
               type: barrage.barrageType,
@@ -56,8 +64,9 @@ export function loadLivePlayer(liveInfo: LiveInfo) {
             }
             dp.danmaku.draw((dan as any) as DPlayerDanmakuItem);
           });
-        })
-        options.success();
+          options.success();
+        };
+        stompClient.activate();
       },
       send: (options) => {
         const danmu = options.data;
@@ -70,10 +79,13 @@ export function loadLivePlayer(liveInfo: LiveInfo) {
           videoId: liveInfo.id,
           sign: sign
         }
-        stompClient.send("/live/send/"+liveInfo.id,JSON.stringify(barrage),{sign: sign});
+        stompClient.publish({
+          destination: "live"+liveInfo.id,
+          body: JSON.stringify(barrage)
+        });
         options.success();
       }
-    }
+    } 
   });
 
 }
